@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Configuration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 德鲁伊连接池配置
+ */
 @Configuration
 public class DruidDBConfig {
 
@@ -19,7 +22,7 @@ public class DruidDBConfig {
         reg.setServlet(new StatViewServlet());
         reg.addUrlMappings("/druid/*");
         //reg.addInitParameter("allow", "127.0.0.1"); //白名单
-        reg.addInitParameter("resetEnable","false");
+        reg.addInitParameter("resetEnable", "false");
         return reg;
     }
 
@@ -32,9 +35,9 @@ public class DruidDBConfig {
         initParams.put("exclusions", "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*");
         filterRegistrationBean.setInitParameters(initParams);
         filterRegistrationBean.addInitParameter("profileEnable", "true");
-        filterRegistrationBean.addInitParameter("principalCookieName","USER_COOKIE");
-        filterRegistrationBean.addInitParameter("principalSessionName","");
-        filterRegistrationBean.addInitParameter("aopPatterns","com.mysiteforme.admin.service");
+        filterRegistrationBean.addInitParameter("principalCookieName", "USER_COOKIE");
+        filterRegistrationBean.addInitParameter("principalSessionName", "");
+        filterRegistrationBean.addInitParameter("aopPatterns", "com.mysiteforme.admin.service");
         filterRegistrationBean.addUrlPatterns("/*");
         return filterRegistrationBean;
     }

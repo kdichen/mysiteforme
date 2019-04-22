@@ -59,8 +59,6 @@ public class BlogChannelController extends BaseController{
         }
         EntityWrapper<Site> wrapper = new EntityWrapper<>();
         wrapper.eq("del_flag",false);
-        List<Site> siteList = siteService.selectList(wrapper);
-        model.addAttribute("siteList",siteList);
         return "/admin/blogChannel/add";
     }
 
@@ -115,8 +113,6 @@ public class BlogChannelController extends BaseController{
 
         EntityWrapper<Site> wrapper = new EntityWrapper<>();
         wrapper.eq("del_flag",false);
-        List<Site> siteList = siteService.selectList(wrapper);
-        model.addAttribute("siteList",siteList);
         return "/admin/blogChannel/edit";
     }
 

@@ -29,19 +29,6 @@
             <a href="#" class="logo">mysiteforme</a>
             <!-- 显示/隐藏菜单 -->
             <a href="javascript:" class="iconfont hideMenu icon-menu1"></a>
-            <#--<!-- 搜索 &ndash;&gt;-->
-            <#--<div class="layui-form component">-->
-                <#--<select name="modules" lay-verify="required" lay-search="">-->
-                    <#--<option value="">直接选择或搜索选择</option>-->
-                    <#--<#if (userMenu?size>0)>-->
-                        <#--<#list userMenu as items>-->
-                        <#--<option value="${items.href}">${items.name}</option>-->
-                        <#--</#list>-->
-                    <#--</#if>-->
-                <#--</select>-->
-                <#--<i class="layui-icon">&#xe615;</i>-->
-            <#--</div>-->
-            <!-- 天气信息 -->
             <div class="weather" pc>
                 <div id="tp-weather-widget"></div>
                 <script>(function(T,h,i,n,k,P,a,g,e){g=function(){P=h.createElement(i);a=h.getElementsByTagName(i)[0];P.src=k;P.charset="utf-8";P.async=1;a.parentNode.insertBefore(P,a)};T["ThinkPageWeatherWidgetObject"]=n;T[n]||(T[n]=function(){(T[n].q=T[n].q||[]).push(arguments)});T[n].l=+new Date();if(T.attachEvent){T.attachEvent("onload",g)}else{T.addEventListener("load",g,false)}}(window,document,"script","tpwidget","//widget.seniverse.com/widget/chameleon.js"))</script>
@@ -123,7 +110,7 @@
     </div>
     <!-- 底部 -->
     <div class="layui-footer footer">
-        <p>Copyright © 2018孤独的旅行家  Design By 马哥 <a href="http://www.miibeian.gov.cn" target="_blank">苏ICP备17063650号 </a></p>
+        <p>中小学生管理系统</a></p>
     </div>
 </div>
 <script>

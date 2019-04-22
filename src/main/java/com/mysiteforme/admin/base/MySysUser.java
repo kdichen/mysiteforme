@@ -4,8 +4,7 @@ import com.mysiteforme.admin.realm.AuthRealm.ShiroUser;
 import org.apache.shiro.SecurityUtils;
 
 /**
- * Created by wangl on 2017/11/25.
- * todo:
+ * 系统用户
  */
 public class MySysUser {
     /**
@@ -23,7 +22,7 @@ public class MySysUser {
         return ShiroUser().getloginName();
     }
 
-    public static String nickName(){
+    public static String nickName() {
         return ShiroUser().getNickName();
     }
 

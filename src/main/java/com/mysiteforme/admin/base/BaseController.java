@@ -6,59 +6,59 @@ import com.mysiteforme.admin.service.*;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
+/**
+ * 基础controller
+ */
 public class BaseController {
-	
-	public User getCurrentUser() {
-		ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-		if(shiroUser == null) {
-			return null;
-		}
-		User loginUser = userService.selectById(shiroUser.getId());
-		return loginUser;
-	}
 
-	@Autowired
-	protected UserService userService;
+    public User getCurrentUser() {
+        ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+        if (shiroUser == null) {
+            return null;
+        }
+        User loginUser = userService.selectById(shiroUser.getId());
+        return loginUser;
+    }
 
-	@Autowired
-	protected MenuService menuService;
+    @Autowired
+    protected UserService userService;
 
-	@Autowired
-	protected RoleService roleService;
+    @Autowired
+    protected MenuService menuService;
 
-	@Autowired
-	protected DictService dictService;
+    @Autowired
+    protected RoleService roleService;
 
-	@Autowired
-	protected RescourceService rescourceService;
+    @Autowired
+    protected DictService dictService;
 
-	@Autowired
-	protected TableService tableService;
+    @Autowired
+    protected RescourceService rescourceService;
 
-	@Autowired
-	protected SiteService siteService;
 
-	@Autowired
-	protected LogService logService;
 
-	@Autowired
-	protected BlogArticleService blogArticleService;
+    @Autowired
+    protected LogService logService;
 
-	@Autowired
-	protected BlogChannelService blogChannelService;
+    @Autowired
+    protected BlogArticleService blogArticleService;
 
-	@Autowired
-	protected BlogCommentService blogCommentService;
+    @Autowired
+    protected BlogChannelService blogChannelService;
 
-	@Autowired
-	protected BlogTagsService blogTagsService;
+    @Autowired
+    protected BlogCommentService blogCommentService;
 
-	@Autowired
-	protected QuartzTaskService quartzTaskService;
+    @Autowired
+    protected BlogTagsService blogTagsService;
 
-	@Autowired
-	protected QuartzTaskLogService quartzTaskLogService;
+    @Autowired
+    protected QuartzTaskService quartzTaskService;
 
-	@Autowired
-	protected UploadInfoService uploadInfoService;
+    @Autowired
+    protected QuartzTaskLogService quartzTaskLogService;
+
+    @Autowired
+    protected UploadInfoService uploadInfoService;
 }
