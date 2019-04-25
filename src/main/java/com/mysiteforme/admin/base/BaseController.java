@@ -33,10 +33,6 @@ public class BaseController {
     @Autowired
     protected DictService dictService;
 
-    @Autowired
-    protected RescourceService rescourceService;
-
-
 
     @Autowired
     protected LogService logService;
@@ -61,4 +57,7 @@ public class BaseController {
 
     @Autowired
     protected UploadInfoService uploadInfoService;
+
+    @Autowired
+    protected EvaluateService evaluateService;
 }

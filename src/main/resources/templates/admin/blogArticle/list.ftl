@@ -73,20 +73,20 @@
 </div>
 <div class="layui-col-xs10">
     <fieldset class="layui-elem-field">
-        <legend>博客内容检索</legend>
+        <legend>成绩管理</legend>
         <div class="layui-field-box">
             <form class="layui-form" id="searchForm">
                 <div class="layui-inline" style="margin-left: 15px">
-                    <label>标题:</label>
+                    <label>学生姓名:</label>
                     <div class="layui-input-inline">
-                        <input type="text" value="" name="s_title" placeholder="请输入标题" class="layui-input search_input">
+                        <input type="text" value="" name="s_title" placeholder="请输入学生姓名" class="layui-input search_input">
                     </div>
                 </div>
                 <div class="layui-inline" style="margin-left: 15px">
-                    <label>文章类型:</label>
+                    <label>科目:</label>
                     <div class="layui-input-inline">
                         <select name="s_category">
-                            <option value="" selected="">请选择文章类型</option>
+                            <option value="" selected="">请选择科目</option>
                     <@my type="blog_article_category">
                         <#list result as r>
                     <option value="${r.value}" >${r.label}</option>
@@ -118,7 +118,7 @@
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
                 <div class="layui-inline">
-                    <a class="layui-btn layui-btn-normal" data-type="addBlogArticle">添加博客内容</a>
+                    <a class="layui-btn layui-btn-normal" data-type="addBlogArticle">添加成绩</a>
                 </div>
             </form>
         </div>
@@ -136,7 +136,7 @@
         </script>
         <script type="text/html" id="content">
             {{#  if(d.content != "" && d.content != null){ }}
-            <span><button lay-event="showcontent" class="layui-btn layui-btn-warm layui-btn-sm">文章预览</button></span>
+            <span><button lay-event="showcontent" class="layui-btn layui-btn-warm layui-btn-sm">预览</button></span>
             {{#  } else { }}
             <span ></span>
             {{#  } }}
@@ -237,7 +237,7 @@
         });
 
         $(function() {
-            var tableload = layer.msg('栏目树拼命加载中', {
+            var tableload = layer.msg('拼命加载中', {
                 icon: 16
                 ,shade: 0.01
             });
@@ -245,11 +245,11 @@
                 layer.close(tableload);
                 if(res.success){
                     var zNodes = res.data;
-                    var newNode = [{name:"未归类",id:-1},{name:"所有文章"}];
+                    var newNode = [{name:"未归类",id:-1},{name:"所有班级"}];
                     zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
                     newNode = zTreeObj.addNodes(null,newNode);
                 }else{
-                    layer.msg("加载栏目树异常:{"+res.message+"}");
+                    layer.msg("加载班级树异常:{"+res.message+"}");
                 }
             });
         });
@@ -259,12 +259,12 @@
             var data = obj.data;
             if(obj.event === 'edit'){
                 var editIndex = layer.open({
-                    title : "编辑博客内容",
+                    title : "编辑考试内容",
                     type : 2,
                     content : "${base}/admin/blogArticle/edit?id="+data.id,
                     success : function(layero, index){
                         setTimeout(function(){
-                            layer.tips('点击此处返回博客内容列表', '.layui-layer-setwin .layui-layer-close', {
+                            layer.tips('点击此处返回成绩管理列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
                         },500);
@@ -277,7 +277,7 @@
                 layer.full(editIndex);
             }
             if(obj.event === "del"){
-                layer.confirm("你确定要删除该博客内容么？",{btn:['是的,我确定','我再想想']},
+                layer.confirm("你确定要删除该成绩么？",{btn:['是的,我确定','我再想想']},
                         function(){
                             $.post("${base}/admin/blogArticle/delete",{"id":data.id},function (res){
                                 if(res.success){
@@ -324,13 +324,13 @@
             cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             cols: [[
                 {type:'checkbox'},
-                {field:'title', title: '标题'},
-                {field:'category', title: '文章类型',templet:'#category'},
-                {field:'channelId', title: '所属栏目',templet:'#channel'},
+                {field:'title', title: '姓名'},
+                {field:'category', title: '科目',templet:'#category'},
+                {field:'channelId', title: '所属班级',templet:'#channel'},
                 {field:'content', title: '内容',templet:'#content'},
-                {field:'isTop', title: '是否置顶',templet:'#isTop'},
-                {field:'isRecommend', title: '是否推荐',templet:'#isRecommend'},
-                {field:'commentCount', title: '评论数'},
+                {field:'isTop', title: '是否及格',templet:'#isTop'},
+                {field:'isRecommend', title: '是否进步',templet:'#isRecommend'},
+                // {field:'commentCount', title: '评论数'},
                 {field:'publistTime',  title: '发布时间',templet:'<div>{{ layui.laytpl.toDateString(d.publistTime,"yyyy-MM-dd") }}</div>',unresize: true},
                 {fixed: 'right', title:'操作',  width: '13%', align: 'center',toolbar: '#barDemo'}
             ]]
@@ -346,12 +346,12 @@
                     }
                 }
                 var addIndex = layer.open({
-                    title : "添加博客内容",
+                    title : "添加成绩内容",
                     type : 2,
                     content : url,
                     success : function(layero, addIndex){
                         setTimeout(function(){
-                            layer.tips('点击此处返回博客内容列表', '.layui-layer-setwin .layui-layer-close', {
+                            layer.tips('点击此处返回成绩管理列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
                         },500);

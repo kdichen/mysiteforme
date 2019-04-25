@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>博客栏目--${site.name}</title>
+    <title>班级管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -26,10 +26,10 @@
 
 <body style="margin:10px 10px 0;">
 <fieldset class="layui-elem-field">
-    <legend>博客栏目</legend>
+    <legend>班级管理</legend>
     <div class="layui-field-box">
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-normal" data-type="addUser">添加根栏目</a>
+            <a class="layui-btn layui-btn-normal" data-type="addUser">添加年级</a>
         </div>
     </div>
 </fieldset>
@@ -46,13 +46,13 @@
                 $ = layui.jquery;
 
         var layout = [
-            { name: '栏目名称', treeNodes: true, headerClass: 'value_col'},
-            { name: 'ID',colClass: 'value_col',  headerClass: 'value_col',style: 'width: 5%;text-align: center;',
+            { name: '班级', treeNodes: true, headerClass: 'value_col'},
+           /* { name: 'ID',colClass: 'value_col',  headerClass: 'value_col',style: 'width: 5%;text-align: center;',
                 render:function (row) {
                     return row.id;
                 }
-            },
-            {
+            },*/
+            /*{
                 name: '图标',
                 headerClass: 'value_col',
                 colClass: 'value_col',
@@ -69,7 +69,7 @@
                 render:function(row){
                     return undefined === row.sort?"" : row.sort;
                 }
-            },
+            },*/
             {
                 name: '创建时间',
                 headerClass: 'value_col',
@@ -85,8 +85,8 @@
                 colClass: 'value_col',
                 style: 'width: 30%;text-align: center;',
                 render: function(row) {
-                    return '<a class="layui-btn layui-btn-normal layui-btn-sm" onclick="addChildMenu(' + row.id + ')"><i class="layui-icon">&#xe654;</i> 添加子栏目</a>' +
-                            '<a class="layui-btn layui-btn-normal layui-btn-sm" onclick="editChildMenu(' + row.id + ')"><i class="layui-icon">&#xe642;</i> 编辑栏目</a>' +
+                    return '<a class="layui-btn layui-btn-normal layui-btn-sm" onclick="addChildMenu(' + row.id + ')"><i class="layui-icon">&#xe654;</i> 添加班别</a>' +
+                            '<a class="layui-btn layui-btn-normal layui-btn-sm" onclick="editChildMenu(' + row.id + ')"><i class="layui-icon">&#xe642;</i> 编辑班别</a>' +
                             '<a class="layui-btn layui-btn-danger layui-btn-sm" onclick="delMenu(' + row.id + ')"><i class="layui-icon">&#xe640;</i> 删除</a>';
                 }
             }
