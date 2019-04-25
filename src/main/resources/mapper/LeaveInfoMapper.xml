@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mysiteforme.admin.dao.LeaveInfoDao" >
+
+    <update id="paushStatusById">
+        update leaveinfor set status = 1 where id = #{id}
+    </update>
+    <update id="resumeStatusById">
+        update leaveinfor set status = 0 where id = #{id}
+    </update>
+    <delete id="deleteLeaveInfoById">
+        delete from leaveinfor where id = #{id}
+    </delete>
+</mapper>
