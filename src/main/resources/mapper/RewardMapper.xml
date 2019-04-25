@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mysiteforme.admin.dao.RewardDao" >
+
+    <sql id="commentField">
+        c.id,
+        c.award_content,
+        c.student_name,
+        c.address,
+        c.reward_level,
+        c.teacher_content,
+        c.update_date,
+        c.create_date,
+        c.remarks,
+        c.del_flag        as "delFlag"
+    </sql>
+
+    <resultMap id="baseMap" type="com.mysiteforme.admin.entity.Reward">
+        <id column="id" property="id"/>
+        <result column="awardContent" property="awardContent"/>
+        <result column="studentName" property="studentName"/>
+        <result column="address" property="address"/>
+        <result column="rewardLevel" property="rewardLevel"/>
+        <result column="teacherContent" property="teacherContent"/>
+        <result column="updateDate" property="updateDate"/>
+        <result column="createDate" property="createDate"/>
+        <result column="remarks" property="remarks"/>
+        <result column="delFlag" property="delFlag"/>
+    </resultMap>
+
+    <resultMap id="detailComment" extends="baseMap" type="com.mysiteforme.admin.entity.Reward">
+        <collection property="replayList" ofType="com.mysiteforme.admin.entity.Reward">
+            <id property="id" column="replayList.id" />
+            <result property="teacherContent" column="replayList.content" />
+            <result property="createDate" column="replayList.createDate" />
+        </collection>
+    </resultMap>
+
+    <select id="selectArticleComments" resultMap="detailComment">
+        select
+        <include refid="commentField" />,
+        replay.id         as "replayList.id",
+        replay.content    as "replayList.content",
+        replay.create_date as "replayList.createDate",
+        replay.ip         as "replayList.ip",
+        replay.system     as "replayList.system",
+        replay.browser    as "replayList.browser",
+        replay.floor      as "replayList.floor"
+        from
+        (select * from blog_comment where
+          del_flag = false
+        and reply_id is null
+        <if test="articleId != null and articleId != 0">
+            and article_id = #{articleId}
+        </if>
+        <if test="type != null and (type == 1 or type == 2)">
+            and type = #{type}
+        </if>
+        order by floor desc
+        limit #{start},#{limit}) c
+        left join (select * from blog_comment where del_flag = false and reply_id is not null) replay on replay.reply_id = c.id
+    </select>
+
+    <select id="selectArticleCommentsCount" resultType="java.lang.Integer">
+        select COUNT(*) from reward where
+          del_flag = false
+          and reply_id is null
+        <if test="articleId != null and articleId != 0">
+            and article_id = #{articleId}
+        </if>
+        <if test="type != null and (type == 1 or type == 2)">
+            and address = #{type}
+        </if>
+        order by reward_level desc
+    </select>
+
+
+    <resultMap id="plusMap" type="com.mysiteforme.admin.entity.Reward" extends="baseMap">
+        <collection property="replayList" column="id" ofType="com.mysiteforme.admin.entity.Reward" select="getCommentByReplyId" notNullColumn="replyId" />
+    </resultMap>
+    
+    <select id="getCommentByReplyId" resultType="com.mysiteforme.admin.entity.Reward">
+            select
+            <include refid="commentField" />
+            from reward c
+            where
+            c.del_flag = false
+            and c.reply_id = #{replyId}
+            order by c.create_date desc
+    </select>
+
+    <select id="selectArticleCommentsByPlus" resultMap="plusMap">
+        select
+        <include refid="commentField" />,
+        u.icon  as "updateUser.icon",
+        u.login_name as "updateUser.loginName",
+        u.nick_name as "updateUser.nickName",
+        u.id        as "updateUser.id"
+        from blog_comment c
+        left join sys_user u on u.id = c.update_by
+        where
+        c.del_flag = false
+        and c.reply_id is null
+        <if test="articleId != null and articleId != 0">
+            and c.article_id = #{articleId}
+        </if>
+        <if test="type != null and (type == 1 or type == 2)">
+            and c.type = #{type}
+        </if>
+        order by c.floor desc
+    </select>
+</mapper>

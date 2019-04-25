@@ -63,4 +63,10 @@ public class BaseController {
 
     @Autowired
     protected PhysicalExaminationService physicalExaminationService;
+
+    @Autowired
+    protected VisitService visitService;
+
+    @Autowired
+    protected PunishedService punishedService;
 }
