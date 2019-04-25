@@ -60,4 +60,7 @@ public class BaseController {
 
     @Autowired
     protected EvaluateService evaluateService;
+
+    @Autowired
+    protected PhysicalExaminationService physicalExaminationService;
 }
