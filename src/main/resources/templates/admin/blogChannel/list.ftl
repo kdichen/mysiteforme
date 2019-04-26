@@ -47,29 +47,6 @@
 
         var layout = [
             { name: '班级', treeNodes: true, headerClass: 'value_col'},
-           /* { name: 'ID',colClass: 'value_col',  headerClass: 'value_col',style: 'width: 5%;text-align: center;',
-                render:function (row) {
-                    return row.id;
-                }
-            },*/
-            /*{
-                name: '图标',
-                headerClass: 'value_col',
-                colClass: 'value_col',
-                style: 'width: 5%;text-align: center;',
-                render:function(row){
-                    return undefined === row.logo?"" : '<i class="layui-icon" style="font-size: 30px;">'+row.logo+'</i>';
-                }
-            },
-            {
-                name: '排序',
-                headerClass: 'value_col',
-                colClass: 'value_col',
-                style: 'width: 5%;text-align: center;',
-                render:function(row){
-                    return undefined === row.sort?"" : row.sort;
-                }
-            },*/
             {
                 name: '创建时间',
                 headerClass: 'value_col',

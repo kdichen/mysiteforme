@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>博客内容编辑--${site.name}</title>
+    <title>成绩管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -55,33 +55,19 @@
 <form class="layui-form" style="width:80%;">
     <input value="${blogArticle.id}" name="id" type="hidden">
     <div class="layui-form-item">
-        <label class="layui-form-label">标题</label>
+        <label class="layui-form-label">姓名</label>
         <div class="layui-input-block">
-                <input  type="text" class="layui-input" value = "${blogArticle.title}" name="title" lay-verify="required" placeholder="请输入标题">
+                <input  type="text" class="layui-input" value = "${blogArticle.title}" name="title" lay-verify="required" placeholder="请输入学生姓名">
 
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">副标题</label>
-        <div class="layui-input-block">
-                <input  type="text" class="layui-input" value = "${blogArticle.subTitle}" name="subTitle"  placeholder="请输入副标题">
-
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">所属栏目</label>
+        <label class="layui-form-label">所属班级</label>
         <div class="layui-input-block">
             <input type="hidden" name="channelId" value="${blogArticle.channelId}">
             <input type="hidden" id="oldChannelId" value="${blogArticle.channelId}">
-            <input  type="text"  class="layui-input layui-disabled" disabled  placeholder="请选择一个父栏目" id="channelNameShow">
+            <input  type="text"  class="layui-input layui-disabled" disabled  placeholder="请选择年级" id="channelNameShow">
             <div class="grid-demo grid-demo-bg1"><ul id="treeDemo" class="ztree"></ul></div>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">摘要</label>
-        <div class="layui-input-block">
-                <textarea name="marks"   placeholder="请输入摘要" class="layui-textarea">${blogArticle.marks}</textarea>
-
         </div>
     </div>
     <div class="layui-form-item">
@@ -99,56 +85,20 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">文章类型</label>
+        <#--<label class="layui-form-label">科目</label>
         <div class="layui-input-block">
                 <@my type="blog_article_category">
                     <#list result as r>
                     <input type="radio" name="category"  value="${r.value}" lay-filter="category" title="${r.label}" <#if (blogArticle.category == r.value)> checked="" </#if>>
                     </#list>
                 </@my>
-        </div>
-    </div>
-    <div id="outLinkUrl">
-        <#if (blogArticle.category == "2")>
-            <div class="layui-form-item">
-                <label class="layui-form-label">外链地址</label>
-                <div class="layui-input-block">
-                    <input  type="text" class="layui-input" value = "${blogArticle.outLinkUrl}" lay-verify="required" name="outLinkUrl"  placeholder="请输入外链地址">
-                </div>
-            </div>
-        </#if>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">来源</label>
-        <div class="layui-input-block">
-                <input  type="text" class="layui-input" value = "${blogArticle.resources}" name="resources"  placeholder="请输入来源">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">文章标签</label>
-        <div class="layui-input-block">
-            <input  type="text"  class="layui-input" name="resources">
-            <div class="layui-input multiSelect">
-                <@tags aid = "${blogArticle.id}">
-                    <#if (result?? && result?size>0) >
-                    <#list result as tag>
-                        <a href="javascript:" class="listTag" data-id="${tag.id}"><span >${tag.name}</span><i></i></a>
-                    </#list>
-                    </#if>
-                </@tags>
-            </div>
-            <fieldset class="layui-elem-field">
-                <legend>推荐标签</legend>
-                <div class="layui-field-box">
-                    <#if (taglist?size>0)>
-                        <#list taglist as item>
-                            <a href="javascript:" class="listTag" data-id="${item.id}"><span >${item.name}</span></a>
-                        </#list>
-                    </#if>
-                    <a class="layui-btn layui-btn-xs" style="padding-bottom: 22px;padding-right: 16px;"><i class="layui-icon boxadd" style="line-height: 10px;width: 100%">&#xe654;</i> </a>
-                </div>
-            </fieldset>
-        </div>
+        </div>-->
+        <label>科目:</label>
+        <select name="category">
+            <option value="" selected="">请选择科目</option>
+            <option value="0" >语文</option>
+            <option value="1" >数学</option>
+        </select>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">发布时间</label>
@@ -165,23 +115,17 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">是否置顶</label>
+        <label class="layui-form-label">是否及格</label>
         <div class="layui-input-block">
                 <input type="checkbox" name="top"  lay-skin="switch" lay-text="是|否" value="1"  <#if (blogArticle.top == true)> checked </#if> >
 
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">是否推荐</label>
+        <label class="layui-form-label">是否进步</label>
         <div class="layui-input-block">
                 <input type="checkbox" name="recommend"  lay-skin="switch" lay-text="是|否" value="1"  <#if (blogArticle.recommend == true)> checked </#if> >
 
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">排序值</label>
-        <div class="layui-input-block">
-            <input  type="text" class="layui-input" value = "${blogArticle.sort}" name="sort" lay-verify="required"  placeholder="请输入排序值">
         </div>
     </div>
     <div class="layui-form-item">
@@ -210,13 +154,7 @@
                             $("#channelNameShow").val(treeNode.name);
                             $("input[name='channelId']").val(treeNode.id);
                         }
-                }},
-                outLinkUrlHtml = '<div class="layui-form-item">\n' +
-                        '                <label class="layui-form-label">外链地址</label>\n' +
-                        '                <div class="layui-input-block">\n' +
-                        '                    <input  type="text" class="layui-input" lay-verify="required" value = "${blogArticle.outLinkUrl}" name="outLinkUrl"  placeholder="请输入外链地址">\n' +
-                        '                </div>\n' +
-                        '            </div>';
+                }}
         zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, ${ztreeData});
         <#if (blogArticle.channelId != null && blogArticle.channelId != "")>
         var choose = zTreeObj.getNodeByParam("id", '${blogArticle.channelId}', null);
@@ -259,49 +197,6 @@
             }
         });
 
-        /**
-         * 文章标签移除
-         */
-        $(".multiSelect").on("click","a i",function () {
-            $(this).parent('a').remove();
-        });
-        /**
-         * 文章标签新增已有
-         */
-        $(".layui-field-box").on("click","a.listTag",function () {
-            var t = $(this).append("<i></i>"),
-                    id = $(this).data("id"),
-                    d = [];
-            $(".multiSelect").children("a").each(function () {
-                d.push($(this).data("id"));
-            });
-            if(d.length<5 && d.indexOf(id)<0){
-                $(".multiSelect").append(t.get(0).outerHTML);
-            }
-            $(this).children("i").remove();
-        });
-        //添加一个新的标签
-        $(".layui-btn-xs").on("click",function () {
-            var t = $(this);
-            layer.prompt({title: '输入一个标签的名字', formType: 0}, function(pass, index,elem){
-                var reg = new RegExp("^[A-Za-z0-9\u4e00-\u9fa5]+$");
-                if(!reg.test(pass)){
-                    layer.alert("请输入中文、数字和英文！");
-                    elem.val("");
-                }else{
-                    $.post("${base}/admin/blogTags/checkTagName",{name:pass.trim()},function (res) {
-                        if(res.success){
-                            t.before('<a href="javascript:;" class="listTag" data-id="'+res.data.id+'"><span >'+res.data.name+'</span></a>');
-                            layer.close(index);
-                        }else{
-                            layer.msg(res.message,{time:1000});
-                            elem.val("");
-                        }
-                    });
-                }
-            });
-
-        });
 
         //初始赋值
         laydate.render({
@@ -377,35 +272,27 @@
             ct = ct.replace(/\"/g, "'");
             data.field.content = c;
             data.field.text = ct;
-            //是否置顶按钮
+            //是否及格按钮
             if(undefined === data.field.top || '0' === data.field.top || null === data.field.top){
                 data.field.top = false;
             }else{
                 data.field.top = true;
             }
-            //是否推荐按钮
+            //是否进步按钮
             if(undefined === data.field.recommend || '0' === data.field.recommend || null === data.field.recommend){
                 data.field.recommend = false;
             }else{
                 data.field.recommend = true;
             }
 
-            //博客标签数据
-            var d = [];
-            $(".multiSelect").children("a").each(function () {
-                d.push({id:$(this).data("id")});
-            });
-            if(d.length>0){
-                data.field.blogTags = d;
-            }
 
             if(undefined === data.field.channelId || '' === data.field.channelId || null === data.field.channelId){
-                layer.msg("请选择一个栏目");
+                layer.msg("请选择年级");
                 return false;
             }
             console.log("原来的值为:"+$("#oldChannelId").val()+"---现在的值为:"+data.field.channelId);
             if($("#oldChannelId").val() !== data.field.channelId){
-                layer.msg('栏目已经发生改变,你确定要这么做么？', {
+                layer.msg('年级已经发生改变,你确定要这么做么？', {
                     btn: ['我确定','我再想想'],
                     time: 20000,
                     yes:function(){
@@ -436,7 +323,7 @@
                         parent.zTreeObj.selectNode(node);
                         parent.zTreeObj.setting.callback.onClick(null, parent.zTreeObj.setting.treeId, node);
                         parent.layer.closeAll();
-                        parent.layer.msg("博客内容更新成功！",{time:1000});
+                        parent.layer.msg("成绩内容更新成功！",{time:1000});
                     }else{
                         layer.msg(res.message);
                     }

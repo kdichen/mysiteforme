@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>博客内容--${site.name}</title>
+    <title>成绩管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -82,19 +82,16 @@
                         <input type="text" value="" name="s_title" placeholder="请输入学生姓名" class="layui-input search_input">
                     </div>
                 </div>
-                <div class="layui-inline" style="margin-left: 15px">
+
+                <div class="layui-input-inline">
                     <label>科目:</label>
-                    <div class="layui-input-inline">
-                        <select name="s_category">
-                            <option value="" selected="">请选择科目</option>
-                    <@my type="blog_article_category">
-                        <#list result as r>
-                    <option value="${r.value}" >${r.label}</option>
-                        </#list>
-                    </@my>
-                        </select>
-                    </div>
+                    <select name="s_category">
+                        <option value="" selected="">请选择科目</option>
+                        <option value="0" >语文</option>
+                        <option value="1" >数学</option>
+                    </select>
                 </div>
+
                 <div class="layui-inline" style="margin-left: 15px">
                     <label>发布时间:</label>
                     <div class="layui-input-inline">
@@ -125,15 +122,15 @@
     </fieldset>
     <div class="layui-form users_list">
         <table class="layui-table" id="test" lay-filter="demo"></table>
+
         <script type="text/html" id="category">
-            <@my type="blog_article_category">
-                <#list result as r>
-                {{#  if(d.category == ${r.value}){ }}
-                <span>${r.label}</span>
-                {{#  } }}
-                </#list>
-            </@my>
+            {{#  if(d.category == 0){ }}
+            <span class="layui-badge layui-bg-green">语文</span>
+            {{# }else{ }}
+            <span class="layui-badge layui-bg-green">数学</span>
+            {{# } }}
         </script>
+
         <script type="text/html" id="content">
             {{#  if(d.content != "" && d.content != null){ }}
             <span><button lay-event="showcontent" class="layui-btn layui-btn-warm layui-btn-sm">预览</button></span>
@@ -330,7 +327,6 @@
                 {field:'content', title: '内容',templet:'#content'},
                 {field:'isTop', title: '是否及格',templet:'#isTop'},
                 {field:'isRecommend', title: '是否进步',templet:'#isRecommend'},
-                // {field:'commentCount', title: '评论数'},
                 {field:'publistTime',  title: '发布时间',templet:'<div>{{ layui.laytpl.toDateString(d.publistTime,"yyyy-MM-dd") }}</div>',unresize: true},
                 {fixed: 'right', title:'操作',  width: '13%', align: 'center',toolbar: '#barDemo'}
             ]]

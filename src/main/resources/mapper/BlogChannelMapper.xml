@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mysiteforme.admin.dao.BlogChannelDao" >
+<mapper namespace="com.mysiteforme.admin.dao.BlogChannelDao">
     <!-- 这儿定义一个resultMap -->
 
     <resultMap type="com.mysiteforme.admin.entity.VO.ZtreeVO" id="getSelf">
         <id property="id" column="id"/>
         <result property="pid" column="pid"/>
         <result property="name" column="name"/>
-        <collection property="children" select="selectZtreeData"  column="{pid = id}">
+        <collection property="children" select="selectZtreeData" column="{pid = id}">
         </collection>
     </resultMap>
 
@@ -53,7 +53,7 @@
         <result property="updateDate" column="updateDate"/>
         <result property="remarks" column="remarks"/>
         <result property="delFlag" column="delFlag"/>
-        <collection property="children" select="selectChannelData"  column="{parentId = id}">
+        <collection property="children" select="selectChannelData" column="{parentId = id}">
         </collection>
     </resultMap>
 
@@ -68,7 +68,7 @@
         site_id as "siteId",
         logo,
         is_base_channel as "isBaseChannel",
-        can_comment  as "canComment",
+        can_comment as "canComment",
         is_no_name as "isNoName",
         is_can_aduit as "canAduit",
         seo_title as "seoTitle",
@@ -92,6 +92,8 @@
         </choose>
         order by sort desc
     </select>
-
+    <select id="selectPatentTreeId" resultType="string">
+         select parent_id as parentId from blog_channel WHERE id = #{channelId}
+    </select>
 
 </mapper>

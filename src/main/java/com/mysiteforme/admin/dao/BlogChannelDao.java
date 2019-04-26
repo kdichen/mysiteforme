@@ -20,4 +20,6 @@ public interface BlogChannelDao extends BaseMapper<BlogChannel> {
     List<ZtreeVO> selectZtreeData(Map<String,Object> map);
 
     List<BlogChannel> selectChannelData(Map<String, Object> map);
+
+    String selectPatentTreeId(String channelId);
 }

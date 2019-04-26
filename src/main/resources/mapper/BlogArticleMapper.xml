@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mysiteforme.admin.dao.BlogArticleDao" >
+<mapper namespace="com.mysiteforme.admin.dao.BlogArticleDao">
     <sql id="select">
         a.id,
         a.title,
@@ -27,24 +27,25 @@
         (select count(*) from blog_comment c where c.del_flag = false and c.article_id = a.id) AS "commentCount"
     </sql>
 
+
     <!-- 这儿定义一个resultMap -->
     <resultMap id="baseMap" type="com.mysiteforme.admin.entity.BlogArticle">
-        <id column="id" property="id" />
-        <result column="title" property="title" />
-        <result column="subTitle" property="subTitle" />
-        <result column="marks" property="marks" />
-        <result column="showPic" property="showPic" />
-        <result column="category" property="category" />
-        <result column="outLinkUrl" property="outLinkUrl" />
-        <result column="resources" property="resources" />
-        <result column="publistTime" property="publistTime" />
-        <result column="content" property="content" />
-        <result column="click" property="click" />
-        <result column="channelId" property="channelId" />
-        <result column="sort" property="sort" />
-        <result column="isTop" property="top" />
-        <result column="isRecommend" property="recommend" />
-        <result column="status" property="status" />
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="subTitle" property="subTitle"/>
+        <result column="marks" property="marks"/>
+        <result column="showPic" property="showPic"/>
+        <result column="category" property="category"/>
+        <result column="outLinkUrl" property="outLinkUrl"/>
+        <result column="resources" property="resources"/>
+        <result column="publistTime" property="publistTime"/>
+        <result column="content" property="content"/>
+        <result column="click" property="click"/>
+        <result column="channelId" property="channelId"/>
+        <result column="sort" property="sort"/>
+        <result column="isTop" property="top"/>
+        <result column="isRecommend" property="recommend"/>
+        <result column="status" property="status"/>
         <result property="createId" column="createId"/>
         <result property="createDate" column="createDate"/>
         <result property="updateId" column="updateId"/>
@@ -63,19 +64,19 @@
         </association>
         <collection property="blogTags" ofType="com.mysiteforme.admin.entity.BlogTags">
             <id property="id" column="blogTags.id"/>
-            <result property="name" column="blogTags.name" />
+            <result property="name" column="blogTags.name"/>
         </collection>
     </resultMap>
 
-    <select id="selectIndexArticle"  resultMap="indexMap">
+    <select id="selectIndexArticle" resultMap="indexMap">
         SELECT
         <include refid="select"/>,
-        c.id            AS "blogChannel.id",
-        c.name          AS "blogChannel.name",
-        c.sort          AS "blogChannel.sort",
-        c.href          AS "blogChannel.href",
-        t.id            AS "blogTags.id",
-        t.name          AS "blogTags.name"
+        c.id AS "blogChannel.id",
+        c.name AS "blogChannel.name",
+        c.sort AS "blogChannel.sort",
+        c.href AS "blogChannel.href",
+        t.id AS "blogTags.id",
+        t.name AS "blogTags.name"
         from
         (select article.* from
         blog_article article
@@ -91,7 +92,7 @@
             ORDER BY
             <foreach collection="orderList" index="index" item="item">
                 <if test="index != 0">
-                     ,
+                    ,
                 </if>
                 ${item} DESC
             </foreach>
@@ -99,18 +100,19 @@
     </select>
 
 
-    <select id="selectDetailArticle" resultType="com.mysiteforme.admin.entity.BlogArticle" parameterType="java.util.Map">
+    <select id="selectDetailArticle" resultType="com.mysiteforme.admin.entity.BlogArticle"
+            parameterType="java.util.Map">
         select
         <include refid="select"/>,
-        c.id            AS "blogChannel.id",
-        c.parent_id     AS "blogChannel.parentId",
-        c.parent_ids    AS "blogChannel.parentIds",
-        c.href          AS "blogChannel.href",
-        c.name          AS "blogChannel.name",
+        c.id AS "blogChannel.id",
+        c.parent_id AS "blogChannel.parentId",
+        c.parent_ids AS "blogChannel.parentIds",
+        c.href AS "blogChannel.href",
+        c.name AS "blogChannel.name",
         c.is_base_channel AS "blogChannel.baseChannel",
-        c.can_comment   AS "blogChannel.canComment",
-        c.is_no_name    AS "blogChannel.isNoName",
-        c.sort          AS "blogChannel.sort"
+        c.can_comment AS "blogChannel.canComment",
+        c.is_no_name AS "blogChannel.isNoName",
+        c.sort AS "blogChannel.sort"
         FROM
         blog_article a
         left join blog_channel c on c.id = a.channel_id
@@ -120,6 +122,9 @@
         </if>
         <if test="title != null and title != ''">
             and a.title like concat('%',#{title},'%')
+        </if>
+        <if test="channel_patent_id != null">
+            and a.channel_patent_id = #{channel_patent_id}
         </if>
         <if test="category != null and category != ''">
             and a.category = #{category}
@@ -136,6 +141,7 @@
         <if test="isBaseChannel != null and isBaseChannel == true">
             and c.is_base_channel = true
         </if>
+
         <if test="channelId != null and channelId != 0">
             <choose>
                 <when test="channelId == -1 or channelId == 0">
@@ -157,7 +163,9 @@
     </select>
 
 
-
+    <insert id="saveOrUpdateTree" parameterType="long">
+      insert into blog_article (channel_patent_id) values (#{treePatentId})
+    </insert>
 
 
     <select id="saveArticleTags" parameterType="java.util.Map">
@@ -172,13 +180,15 @@
         delete from blog_article_tags where article_id = #{articleId}
     </select>
 
-    <select id="selectNewCommentArticle" resultType="com.mysiteforme.admin.entity.BlogArticle" parameterType="java.lang.Integer">
+    <select id="selectNewCommentArticle" resultType="com.mysiteforme.admin.entity.BlogArticle"
+            parameterType="java.lang.Integer">
         select
         <include refid="select"/>,
         c.create_date as "newestCommentTime"
         from blog_article a
         right join
-        (select * from(select * from blog_comment where del_flag = FALSE and type = 1 ORDER BY article_id,create_date desc limit 100000000) m GROUP BY m.article_id ) c on c.article_id = a.id
+        (select * from(select * from blog_comment where del_flag = FALSE and type = 1 ORDER BY article_id,create_date
+        desc limit 100000000) m GROUP BY m.article_id ) c on c.article_id = a.id
         where a.del_flag = FALSE
         GROUP BY a.id
         order by c.create_date desc
