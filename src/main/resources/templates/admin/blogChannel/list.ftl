@@ -96,7 +96,7 @@
                     content : "${base}/admin/blogChannel/add",
                     success : function(layero, addIndex){
                         setTimeout(function(){
-                            layer.tips('点击此处返回博客栏目列表', '.layui-layer-setwin .layui-layer-close', {
+                            layer.tips('点击此处返回班级栏目列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
                         },500);
@@ -124,7 +124,7 @@
             content : "${base}/admin/blogChannel/add?parentId="+data,
             success : function(layero, addIndex){
                 setTimeout(function(){
-                    layer.tips('点击此处返回博客栏目列表', '.layui-layer-setwin .layui-layer-close', {
+                    layer.tips('点击此处返回班级栏目列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 },500);
@@ -144,7 +144,7 @@
             content : "${base}/admin/blogChannel/edit?id="+data,
             success : function(layero, index){
                 setTimeout(function(){
-                    layer.tips('点击此处返回博客栏目列表', '.layui-layer-setwin .layui-layer-close', {
+                    layer.tips('点击此处返回班级栏目列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 },500);
