@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>${site.name}</title>
+    <title>首页</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
@@ -10,12 +10,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <!-- 页面描述 -->
-    <meta name="description" content="${site.description}"/>
-    <!-- 页面关键词 -->
-    <meta name="keywords" content="${site.keywords}"/>
-    <!-- 网页作者 -->
-    <meta name="author" content="${site.author}"/>
     <link rel="icon" href="${site.logo}">
     <link rel="stylesheet" href="${base}/static/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
@@ -26,7 +20,7 @@
     <!-- 顶部 -->
     <div class="layui-header header">
         <div class="layui-main">
-            <a href="#" class="logo">mysiteforme</a>
+            <a href="#" class="logo">学生档案管理</a>
             <!-- 显示/隐藏菜单 -->
             <a href="javascript:" class="iconfont hideMenu icon-menu1"></a>
             <div class="weather" pc>
@@ -110,7 +104,7 @@
     </div>
     <!-- 底部 -->
     <div class="layui-footer footer">
-        <p>中小学生管理系统</a></p>
+        <p>学生档案管理系统</a></p>
     </div>
 </div>
 <script>

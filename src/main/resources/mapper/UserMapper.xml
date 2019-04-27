@@ -85,20 +85,33 @@
 
     <select id="selectUserMenuCount" resultType="java.util.Map">
         select
+        /*系统用户管理*/
         (select count(*) from sys_user where del_flag =false) as "sys:user:list",
+        /*系统角色管理*/
         (select count(*) from sys_role where del_flag =false) as "sys:role:list",
+        /*系统权限管理*/
         (select count(*) from sys_menu where del_flag =false) as "sys:menu:list",
+        /*系统资源管理*/
         (select count(*) from sys_rescource where del_flag = false) as "sys:rescource:list",
+        /*系统日志管理*/
         (select count(*) from sys_log where del_flag = false) as "sys:log:list",
         24 as "sys:site:list",
-        (select count(*) from information_schema.tables where table_schema='mysiteforme') as "sys:table:list",
-        (select count(*) from sys_dict where del_flag = false) as "sys:dict:list",
-        (select count(*) from blog_comment where del_flag =false) as "blog:comment:list",
+        /*成绩管理*/
         (select count(*) from blog_article where del_flag = false) as "blog:article:list",
+        /*年级管理*/
         (select count(*) from blog_channel where del_flag = false) as "blog:channel:list",
-        (select count(*) from blog_tags where del_flag = false) as "blog:tags:list",
-        (select count(*) from quartz_task where del_flag = false) as "quartz:task:list",
-        (select count(*) from quartz_task_log where del_flag = false) as "quartz:log:list"
+        /*体检记录*/
+        (select count(*) from physical where del_flag = false) as "blog:physicalExamination:list",
+        /*家访记录*/
+        (select count(*) from visit where del_flag = false) as "blog:visit:list",
+        /*获奖记录*/
+        (select count(*) from reward where del_flag = false) as "blog:reward:list",
+        /*受罚记录*/
+        (select count(*) from punished where del_flag = false) as "blog:punished:list",
+        /*评价记录*/
+        (select count(*) from evaluate where del_flag = false) as "blog:evaluate:list",
+        /*请假信息*/
+        (select count(*) from leaveinfor where del_flag = false) as "blog:leaveInfo:list"
     </select>
 
 

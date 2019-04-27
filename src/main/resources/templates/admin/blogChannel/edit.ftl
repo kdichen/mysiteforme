@@ -76,70 +76,51 @@
         var form = layui.form,
                 layer = layui.layer;
         $ = layui.jquery;
-        //根据中文生成英文字母
-        $("input[name='name']").on('blur', function () {
-            var channelName = $(this).val(),
-                    reg = new RegExp("^[A-Za-z0-9\u4e00-\u9fa5]+$");
-            if (channelName != null && channelName !== "") {
-                if (!reg.test(channelName)) {
-                    layer.tips('只能输入中文英文跟数字', $(this), {
-                        tips: [1, '#0FA6D8'] //还可配置颜色
+
+        form.on("submit(addBlogChannel)", function (data) {
+            if (undefined === data.field.baseChannel || '0' === data.field.baseChannel || null === data.field.baseChannel) {
+                data.field.baseChannel = false;
+            } else {
+                data.field.baseChannel = true;
+            }
+            if (undefined === data.field.canComment || '0' === data.field.canComment || null === data.field.canComment) {
+                data.field.canComment = false;
+            } else {
+                data.field.canComment = true;
+            }
+            if (undefined === data.field.noName || '0' === data.field.noName || null === data.field.noName) {
+                data.field.noName = false;
+            } else {
+                data.field.noName = true;
+            }
+            if (undefined === data.field.canAduit || '0' === data.field.canAduit || null === data.field.canAduit) {
+                data.field.canAduit = false;
+            } else {
+                data.field.canAduit = true;
+            }
+            if (data.field.preHref != null && data.field.preHref !== undefined && data.field.preHref !== "") {
+                data.field.href = data.field.preHref + data.field.href;
+            }
+            var loadIndex = layer.load(2, {
+                shade: [0.3, '#333']
+            });
+            //给角色赋值
+            $.post("${base}/admin/blogChannel/edit", data.field, function (res) {
+                layer.close(loadIndex);
+                if (res.success) {
+                    parent.layer.msg("班级栏目编辑成功！", {time: 1000}, function () {
+                        parent.layer.close(parent.editIndex);
+                        //刷新父页面
+                        parent.location.reload();
                     });
-                    $(this).val("");
                 } else {
-                    $("input[name='href']").val(pinyin.getCamelChars(channelName).toLowerCase());
+                    layer.msg(res.message);
                 }
-            } else {
-                $("input[name='href']").val("");
-            }
+            });
+            return false;
         });
     });
 
-    form.on("submit(addBlogChannel)", function (data) {
-        if (undefined === data.field.baseChannel || '0' === data.field.baseChannel || null === data.field.baseChannel) {
-            data.field.baseChannel = false;
-        } else {
-            data.field.baseChannel = true;
-        }
-        if (undefined === data.field.canComment || '0' === data.field.canComment || null === data.field.canComment) {
-            data.field.canComment = false;
-        } else {
-            data.field.canComment = true;
-        }
-        if (undefined === data.field.noName || '0' === data.field.noName || null === data.field.noName) {
-            data.field.noName = false;
-        } else {
-            data.field.noName = true;
-        }
-        if (undefined === data.field.canAduit || '0' === data.field.canAduit || null === data.field.canAduit) {
-            data.field.canAduit = false;
-        } else {
-            data.field.canAduit = true;
-        }
-        if (data.field.preHref != null && data.field.preHref !== undefined && data.field.preHref !== "") {
-            data.field.href = data.field.preHref + data.field.href;
-        }
-        var loadIndex = layer.load(2, {
-            shade: [0.3, '#333']
-        });
-        //给角色赋值
-        $.post("${base}/admin/blogChannel/edit", data.field, function (res) {
-            layer.close(loadIndex);
-            if (res.success) {
-                parent.layer.msg("班级栏目编辑成功！", {time: 1000}, function () {
-                    parent.layer.close(parent.editIndex);
-                    //刷新父页面
-                    parent.location.reload();
-                });
-            } else {
-                layer.msg(res.message);
-            }
-        });
-        return false;
-    });
-
-    })
-    ;
 </script>
 </body>
 </html>
