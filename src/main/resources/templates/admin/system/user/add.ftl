@@ -2,19 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>用户添加--${site.name}</title>
+    <title>用户添加</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <!-- 页面描述 -->
-    <meta name="description" content="${site.description}"/>
-    <!-- 页面关键词 -->
-    <meta name="keywords" content="${site.keywords}"/>
-    <!-- 网页作者 -->
-    <meta name="author" content="${site.author}"/>
     <link rel="stylesheet" href="${base}/static/layui/css/layui.css" media="all" />
     <style type="text/css">
         .layui-form-item .layui-inline{ width:33.333%; float:left; margin-right:0; }
@@ -80,9 +74,9 @@
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">是否启用</label>
+        <label class="layui-form-label">是否在职</label>
         <div class="layui-input-block">
-            <input type="checkbox" name="delFlag" lay-skin="switch"  lay-filter="delFlag"  lay-text="启用|停用" checked>
+            <input type="checkbox" name="delFlag" lay-skin="switch"  lay-filter="delFlag"  lay-text="在职|离职" checked>
         </div>
     </div>
     <div class="layui-form-item">
@@ -98,7 +92,7 @@
        var form = layui.form,
            $    = layui.jquery,
            layer = layui.layer,
-           delFlage = false;    //默认启用用户
+           delFlage = false;    //默认在职用户
 
         form.on("submit(addUser)",function(data){
             var loadIndex = layer.load(2, {
@@ -111,7 +105,7 @@
                 selectRole.push({"id":$(this).val()});
             });
             data.field.roleLists = selectRole;
-            //判断用户是否启用
+            //判断用户是否在职
             if(undefined !== data.field.delFlag && null != data.field.delFlag){
                 data.field.delFlag = false;
             }else{

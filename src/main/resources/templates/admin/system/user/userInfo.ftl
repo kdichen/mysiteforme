@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>个人资料--${site.name}</title>
+    <title>个人资料</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -58,7 +58,7 @@
     </div>
     <div class="user_right">
         <input type="hidden"  name="icon"  value="${userinfo.icon}" >
-        <button type="button" class="layui-btn layui-btn-normal" id="test1"><i class="layui-icon"></i>来来来，换个脸怎么样</button>
+        <button type="button" class="layui-btn layui-btn-normal" id="test1"><i class="layui-icon"></i>更换头像</button>
         <img <#if (userinfo.icon??)>src="${userinfo.icon}" <#else> src="${base}/static/images/face.jpg " </#if> class="layui-circle" id="userFace">
     </div>
     <div class="layui-form-item" style="margin-left: 5%;">
@@ -114,7 +114,7 @@
             $.post("${base}/admin/system/user/saveUserinfo",data.field,function(res){
                 layer.close(loadIndex);
                 if(res.success){
-                    parent.layer.msg("您的个人信息保存成功！",{time:1500},function(){
+                    parent.layer.msg("个人信息保存成功！",{time:1500},function(){
                         parent.location.reload();
                     });
                 }else{

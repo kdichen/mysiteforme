@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>用户修改--${site.name}</title>
+    <title>用户修改</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -75,9 +75,9 @@
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">是否启用</label>
+        <label class="layui-form-label">是否在职</label>
         <div class="layui-input-block">
-            <input type="checkbox" name="delFlag" lay-skin="switch" value="true"  lay-text="启用|停用" <#if (localuser.delFlag  == false)>checked=""</#if> >
+            <input type="checkbox" name="delFlag" lay-skin="switch" value="true"  lay-text="在职|离职" <#if (localuser.delFlag  == false)>checked=""</#if> >
         </div>
     </div>
     <div class="layui-form-item">
